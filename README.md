@@ -1,6 +1,6 @@
 # Lista de tarefas (To do list) ✅
 
-Aplicação Flutter de lista de tarefas seguindo os princípios de Clean Architecture, Clean Code e SOLID.
+Aplicação Flutter de lista de tarefas seguindo os princípios de Clean Architecture, Clean Code e SOLID, com testes unitários das principais funcionalidades.
 
 ## 📱 Sobre o projeto
 
@@ -31,7 +31,7 @@ flutter pub get
 flutter run -d chrome
 ```
 
-- Testes:
+## 🔎 Como rodar os testes
 
 ```
 // Executa TODOS os testes
