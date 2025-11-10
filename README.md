@@ -1,16 +1,48 @@
-# flutter_todo_list
+# Lista de tarefas (To do list) ✅
 
-A new Flutter project.
+Aplicação Flutter de lista de tarefas seguindo os princípios de Clean Architecture, Clean Code e SOLID.
 
-## Getting Started
+## 📱 Sobre o projeto
 
-This project is a starting point for a Flutter application.
+### Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- Criação, exclusão e filtragem de tarefas (baseadas no estado)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Tecnologias utilizadas (packages)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [**shared_preferences**](https://pub.dev/packages/shared_preferences): cache local
+- [**equatable**](https://pub.dev/packages/equatable): comparação de objetos
+- [**provider**](https://pub.dev/packages/provider): gerenciamento de estado
+- [**mockito**](https://pub.dev/packages/mockito) e [**build_runner**](https://pub.dev/packages/build_runner): testes
+
+## 🚀 Como executar o projeto
+
+- Versão do Flutter: 3.35.x
+- Versão do Dart: 3.9.x
+
+```
+// Limpa o cache e arquivos temporários (se necessário)
+flutter clean
+
+// Instala os packages
+flutter pub get
+
+// Executa no navegador
+flutter run -d chrome
+```
+
+- Testes:
+
+```
+// Executa TODOS os testes
+flutter test
+
+// Executa testes com cobertura
+flutter test --coverage
+genhtml coverage/lcov.info -o coverage/html
+open coverage/html/index.html
+
+// Executa testes específicos (por pasta ou arquivo)
+flutter test test/features/todo/domain/ 
+flutter test test/features/todo/presentation/widgets/todo_list_test.dart
+```
