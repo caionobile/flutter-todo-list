@@ -54,28 +54,32 @@ class _TodoItemState extends State<TodoItem>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _animation,
-      child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        child: ListTile(
-          leading: Checkbox(
-            value: widget.todo.completed,
-            onChanged: (value) => _toggleTodo(),
-            activeColor: Color.fromRGBO(28, 109, 176, 1),
-          ),
-          title: Text(
-            widget.todo.title,
-            style: TextStyle(
-              fontSize: 16,
-              color: widget.todo.completed ? Colors.grey : Colors.black,
-              decoration: widget.todo.completed
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
-            ),
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: ScaleTransition(
+        scale: _animation,
+        child: InkWell(
           onTap: _toggleTodo,
           onLongPress: _showDeleteModal,
+          child: Row(
+            children: [
+              Checkbox(
+                value: widget.todo.completed,
+                onChanged: (value) => _toggleTodo(),
+                activeColor: Color.fromRGBO(28, 109, 176, 1),
+              ),
+              Text(
+                widget.todo.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: widget.todo.completed ? Colors.grey : Colors.black,
+                  decoration: widget.todo.completed
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

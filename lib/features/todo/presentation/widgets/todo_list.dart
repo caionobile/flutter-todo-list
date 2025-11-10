@@ -86,13 +86,16 @@ class TodoList extends StatelessWidget {
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      padding: const EdgeInsets.only(bottom: 80),
-      child: ListView.builder(
-        itemCount: filteredTodos.length,
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: ListView.separated(
         itemBuilder: (context, index) {
           final todo = filteredTodos[index];
           return TodoItem(todo: todo);
         },
+        separatorBuilder: (context, index) {
+          return const Divider(height: 1);
+        },
+        itemCount: filteredTodos.length,
       ),
     );
   }

@@ -14,14 +14,22 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
+  void _handleTabAnimation() {
+    if (_tabController.animation!.value == _tabController.index.toDouble()) {
+      setState(() {});
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.animation!.addListener(_handleTabAnimation);
   }
 
   @override
   void dispose() {
+    _tabController.animation!.removeListener(_handleTabAnimation);
     _tabController.dispose();
     super.dispose();
   }
@@ -44,7 +52,7 @@ class _HomePageState extends State<HomePage>
           PreferredSize(
             preferredSize: const Size.fromHeight(48),
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(25),
@@ -54,7 +62,10 @@ class _HomePageState extends State<HomePage>
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
                   color: Color.fromRGBO(28, 109, 176, 1),
-                  borderRadius: BorderRadius.all(Radius.circular(36)),
+                  borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(_tabController.index == 0 ? 36 : 0),
+                    right: Radius.circular(_tabController.index == 2 ? 36 : 0),
+                  ),
                 ),
                 dividerHeight: 0,
                 labelColor: Colors.white,
@@ -91,11 +102,7 @@ class _HomePageState extends State<HomePage>
         onPressed: _showAddTodoModal,
         backgroundColor: Color.fromRGBO(12, 61, 101, 1),
         foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            120,
-          ), // Adjust the radius as needed
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(120)),
         child: const Icon(Icons.add),
       ),
     );
