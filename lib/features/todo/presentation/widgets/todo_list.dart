@@ -26,6 +26,50 @@ class TodoList extends StatelessWidget {
     }
   }
 
+  String _getEmptyMessage(TodoFilter filter) {
+    switch (filter) {
+      case TodoFilter.all:
+        return 'Add a task to get started';
+      case TodoFilter.pending:
+        return 'No pending tasks';
+      case TodoFilter.done:
+        return 'No completed tasks';
+    }
+  }
+
+  String _getEmptySubtitle(TodoFilter filter) {
+    switch (filter) {
+      case TodoFilter.all:
+        return 'Tap the + button to create your first task';
+      case TodoFilter.pending:
+        return 'All tasks are completed or add new tasks';
+      case TodoFilter.done:
+        return 'Complete some tasks to see them here';
+    }
+  }
+
+  IconData _getEmptyIcon(TodoFilter filter) {
+    switch (filter) {
+      case TodoFilter.all:
+        return Icons.task_outlined;
+      case TodoFilter.pending:
+        return Icons.check_circle_outline;
+      case TodoFilter.done:
+        return Icons.celebration_outlined;
+    }
+  }
+
+  Color _getEmptyIconColor(TodoFilter filter, BuildContext context) {
+    switch (filter) {
+      case TodoFilter.all:
+        return Colors.blue;
+      case TodoFilter.pending:
+        return Colors.orange;
+      case TodoFilter.done:
+        return Colors.green;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TodoProvider>(context);
@@ -36,6 +80,10 @@ class TodoList extends StatelessWidget {
 
     final filteredTodos = _getFilteredTodos(provider.todos, filter);
 
+    if (filteredTodos.isEmpty) {
+      return _buildEmptyState(context, filter);
+    }
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.only(bottom: 80),
@@ -45,6 +93,39 @@ class TodoList extends StatelessWidget {
           final todo = filteredTodos[index];
           return TodoItem(todo: todo);
         },
+      ),
+    );
+  }
+
+  Widget _buildEmptyState(BuildContext context, TodoFilter filter) {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            _getEmptyIcon(filter),
+            size: 80,
+            color: _getEmptyIconColor(filter, context),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            _getEmptyMessage(filter),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              color: Colors.grey[600],
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            _getEmptySubtitle(filter),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.grey[500]),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }

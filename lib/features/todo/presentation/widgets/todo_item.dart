@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../domain/entities/todo_entity.dart';
 import '../providers/todo_provider.dart';
 import 'delete_todo_modal.dart';
@@ -61,6 +62,7 @@ class _TodoItemState extends State<TodoItem>
           leading: Checkbox(
             value: widget.todo.completed,
             onChanged: (value) => _toggleTodo(),
+            activeColor: Color.fromRGBO(28, 109, 176, 1),
           ),
           title: Text(
             widget.todo.title,

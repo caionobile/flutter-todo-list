@@ -35,54 +35,67 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
         title: const Text('To do list', textAlign: TextAlign.center),
+        foregroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(12, 61, 101, 1),
         centerTitle: true,
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [
-            Tab(
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    bottomLeft: Radius.circular(25),
-                  ),
-                  color: Colors.transparent,
-                ),
-                child: const Text('All'),
-              ),
-            ),
-            const Tab(text: 'pending'),
-            Tab(
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(25),
-                    bottomRight: Radius.circular(25),
-                  ),
-                  color: Colors.transparent,
-                ),
-                child: const Text('done'),
-              ),
-            ),
-          ],
-          indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: Colors.blue,
-          ),
-          labelColor: Colors.white,
-          unselectedLabelColor: Colors.blue,
-        ),
       ),
-      body: TabBarView(
-        controller: _tabController,
+      body: Column(
         children: [
-          TodoList(filter: TodoFilter.all),
-          TodoList(filter: TodoFilter.pending),
-          TodoList(filter: TodoFilter.done),
+          PreferredSize(
+            preferredSize: const Size.fromHeight(48),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: TabBar(
+                controller: _tabController,
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicator: BoxDecoration(
+                  color: Color.fromRGBO(28, 109, 176, 1),
+                  borderRadius: BorderRadius.all(Radius.circular(36)),
+                ),
+                dividerHeight: 0,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.grey[600],
+                labelStyle: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
+                ),
+                tabs: const [
+                  Tab(text: 'All'),
+                  Tab(text: 'pending'),
+                  Tab(text: 'done'),
+                ],
+              ),
+            ),
+          ),
+          Flexible(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                TodoList(filter: TodoFilter.all),
+                TodoList(filter: TodoFilter.pending),
+                TodoList(filter: TodoFilter.done),
+              ],
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTodoModal,
+        backgroundColor: Color.fromRGBO(12, 61, 101, 1),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            120,
+          ), // Adjust the radius as needed
+        ),
         child: const Icon(Icons.add),
       ),
     );
