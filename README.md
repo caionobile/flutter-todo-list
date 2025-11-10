@@ -7,7 +7,7 @@ Aplicação Flutter de lista de tarefas seguindo os princípios de Clean Archite
 ### Funcionalidades
 
 - Criação de tarefas
-- Exclusão (ao pressionar e segurar a tarefa na listagem)
+- Exclusão de tarefas (ao pressionar e segurar o item na listagem)
 - Filtragem de tarefas baseada no estado
 
 ### Tecnologias utilizadas (packages)
