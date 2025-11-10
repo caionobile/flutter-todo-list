@@ -27,8 +27,8 @@ flutter clean
 // Instala os packages
 flutter pub get
 
-// Executa no navegador
-flutter run -d chrome
+// Executa
+flutter run
 ```
 
 ## 🔎 Como rodar os testes
